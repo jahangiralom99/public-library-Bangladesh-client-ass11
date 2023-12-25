@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { BsEyeFill, BsEyeSlashFill, BsGoogle } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [isShow, setIsShow] = useState(false);
   const [error, setError] = useState(null);
+  const {logInUser} = useAuth()
 
   const handleSubmitBtn = async (e) => {
     e.preventDefault();
@@ -12,12 +15,23 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    const toastId = toast.loading("loading....");
+    // console.log(email, password);
+    try {
+      
+      await logInUser(email, password);
+      toast.success("logged in successfully...", { id: toastId });
+
+    } catch (err) {
+      console.log(err);
+      setError(err.message)
+      toast.error(err.message, { id: toastId });
+    }
   };
 
   return (
     <div className="px-6">
-      <div className="flex min-h-full flex-1 flex-col md:flex-row justify-center px-6 py-12 lg:px-8">
+      <div className="flex min-h-full items-center flex-1 flex-col md:flex-row justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
           <img
             className="mx-auto h- w-auto"

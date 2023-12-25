@@ -121,7 +121,7 @@ const Banner = () => {
             <Button>Read More</Button>
           </div>
         </div>
-        <div className="lg:absolute lg:-bottom-[245px] 	">
+        <div className="lg:absolute lg:-bottom-[260px] 	">
           <img
             className="h-40 object-cover lg:w-96 w-full"
             src="https://i.postimg.cc/kMf8hFzW/01-home-03.jpg"
@@ -142,6 +142,5 @@ const Banner = () => {
 };
 
 export default Banner;
-
 
 // https://i.postimg.cc/J0H4TB33/Depositphotos-155947488-xl-2015-2-copyright.jpg
