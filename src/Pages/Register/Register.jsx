@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { BsEyeFill, BsEyeSlashFill, BsGoogle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Register = () => {
     const [isShow, setIsShow] = useState(false);
     const [error, setError] = useState(null);
-    const {createUser, updateName , user} =useAuth()
+  const { createUser, updateName, user } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate()
 
     const handleSubmitBtn = async(e) => {
         e.preventDefault();
@@ -16,14 +18,33 @@ const Register = () => {
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-        const toastId = toast.loading("Creating Register User...");
 
-        // console.log(name, photo, email, password);
+        
+        setError('');
+
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters");
+          return;
+        }
+        else if (!/(?=.*?[A-Z])/.test(password)) {
+           setError("Password must be at least one Upper Case character");
+          return;
+        }
+        else if (!/(?=.*?[#?!@$%^&*-])/.test(password)){
+          setError("Password at least one special character");
+          return;
+        }
+
+        const toastId = toast.loading("Please wait...");
+
+      // login 
         try {
             const user = await createUser(email, password);
             await updateName(name, photo);
             console.log(user);
-            toast.success("logged in successfully...",{id: toastId});
+          toast.success("logged in successfully...", { id: toastId });
+          navigate(location?.state? location.state : "/")
+
         }catch(err) {
             console.log(err);
             setError(err.message)

@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { BsEyeFill, BsEyeSlashFill, BsGoogle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxios from "../../Hooks/useAxios";
 
 const Login = () => {
   const [isShow, setIsShow] = useState(false);
   const [error, setError] = useState(null);
-  const {logInUser} = useAuth()
+  const { logInUser,googleLogIn } = useAuth()
+  const location = useLocation();
+  const navigate = useNavigate()
+  const axios = useAxios()
+
 
   const handleSubmitBtn = async (e) => {
     e.preventDefault();
@@ -15,19 +20,33 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    const toastId = toast.loading("loading....");
+    const toastId = toast.loading("Please wait...");
     // console.log(email, password);
     try {
       
-      await logInUser(email, password);
+      const users = await logInUser(email, password);
+      const res = await axios.post("/create-jwt-token",{email: users.user.email,});
+      console.log(res);
       toast.success("logged in successfully...", { id: toastId });
-
+      navigate(location?.state? location.state : "/")
+      
     } catch (err) {
-      console.log(err);
       setError(err.message)
       toast.error(err.message, { id: toastId });
     }
   };
+
+  const handleGoogle = async () => {
+    const toastID = toast.loading("Google logged in.............");
+    try {
+      await googleLogIn();
+      toast.success("Google logged in Successfully", { id: toastID });
+      navigate(location?.state? location.state : "/")
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message, {id : toastID});
+    }
+  }
 
   return (
     <div className="px-6">
@@ -122,11 +141,11 @@ const Login = () => {
             )}
           </div>
           <div className="flex justify-center mb-6">
-        <div className="text-center">
+        <div onClick={handleGoogle} className="text-center">
           <button className="btn btn-outline btn-primary">
             <BsGoogle className="text-red-500" />
             Log in with
-            <div>
+            <div >
               <span className="text-[#008744]">G</span>
               <span className="text-red-500">o</span>
               <span className="text-[#ffa700]">o</span>

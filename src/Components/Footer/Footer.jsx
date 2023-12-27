@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="">
+    <footer className="mt-12">
       <div className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
         <aside className="items-center grid-flow-col gap-12">
           <Link to="/"><img src="https://i.postimg.cc/htf60jtr/Civic-Hub-3.png" alt="" /></Link>

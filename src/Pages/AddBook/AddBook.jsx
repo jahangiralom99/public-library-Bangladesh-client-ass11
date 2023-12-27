@@ -1,38 +1,89 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAxios from "../../Hooks/useAxios";
+import toast from "react-hot-toast";
+import LoadingB from "../../Components/ui/LoadingB";
 
 const AddBook = () => {
+  const axios = useAxios() 
+  const location = useLocation();
+  const navigate = useNavigate()
 
-    const handleUpdateBtn = (e) => {
-        e.preventDefault();
+
+  const handleUpdateBtn = async(e) => {
+    e.preventDefault();
+    const form = e.target;
+    const addBooks = {
+      image: form.image.value,
+      rating: form.rating.value,
+      name: form.name.value,
+      quantity: form.quantity.value,
+      author_name: form.author_name.value,
+      category: form.category.value,
+      short_description: form.short_description.value,
+    };
+
+    const toastID = toast.loading("Please wait...")
+
+    try {
+      const res =await axios.post("/create-books", addBooks);
+      if (res.data.acknowledged) {
+        toast.success("Book Added successfully", { id: toastID });
+        navigate(location?.state? location.state : "/")
+     }
+
+    } catch (err) {
+      toast.error(err.message, {id: toastID})
+      console.log(err);
     }
+    
+  };
 
-    return (
-        <div className="mt-12">
-      <div className="bg-base-200 p-4">
-        <h1 className="text-4xl font-bold text-center">Add Books</h1>
+  return (
+    <div className="mt-12">
+      <div className="bg-base-200 p-4 ">
+        <div className="flex flex-col">
+        <h1 className="text-4xl font-bold ">Add Books</h1>
+        <LoadingB></LoadingB>
+       </div>
         <form onSubmit={handleUpdateBtn}>
           <div className="mt-12">
+          <div className="mb-6">
+              <label className="form-control md:w-full ">
+                <div className="label">
+                  <span className="label-text font-bold">Image</span>
+                </div>
+                <input
+                  type="text"
+                  required
+                  placeholder="image url"
+                  name="image"
+                  className="input border-none w-full "
+                />
+              </label>
+            </div>
             {/* 1st row */}
             <div className="md:flex gap-8">
               <label className="form-control md:w-1/2 ">
                 <div className="label">
-                  <span className="label-text font-bold">Name</span>
+                  <span className="label-text font-bold">Rating</span>
                 </div>
                 <input
                   type="text"
-                  placeholder="name"
-                  name="name"
+                  required
+                  placeholder="Rating"
+                  name="rating"
                   className="input border-none w-full "
                 />
               </label>
               <label className="form-control md:w-1/2">
                 <div className="label">
-                  <span className="label-text">Brand Name</span>
+                  <span className="label-text">Name</span>
                 </div>
                 <input
                   type="text"
-                  placeholder="Brand Name"
-                  name="brandName"
+                  required
+                  placeholder="Name"
+                  name="name"
                   className="input border-none w-full "
                 />
               </label>
@@ -41,25 +92,27 @@ const AddBook = () => {
             <div className="md:flex gap-8">
               <label className="form-control md:w-1/2 ">
                 <div className="label">
-                  <span className="label-text font-bold">Price</span>
+                  <span className="label-text font-bold">Quantity</span>
                 </div>
                 <input
                   type="text"
-                  placeholder="Price"
-                  name="price"
+                  required
+                  placeholder="Quantity"
+                  name="quantity"
                   className="input border-none  w-full "
                 />
               </label>
               <label className="form-control md:w-1/2">
                 <div className="label">
                   <span className="label-text font-bold">
-                    Short description
+                  Author Name
                   </span>
                 </div>
                 <input
                   type="text"
-                  placeholder="description"
-                  name="description"
+                  required
+                  placeholder="Author Name"
+                  name="author_name"
                   className="input border-none w-full "
                 />
               </label>
@@ -68,51 +121,48 @@ const AddBook = () => {
             <div className="md:flex gap-8">
               <label className="form-control md:w-1/2 ">
                 <div className="label">
-                  <span className="label-text font-bold">Rating</span>
+                  <span className="label-text font-bold">Category</span>
                 </div>
                 <input
                   type="text"
-                  placeholder="Rating"
-                  name="rating"
+                  required
+                  placeholder="Category"
+                  name="category"
                   className="input border-none  w-full "
                 />
               </label>
               <label className="form-control md:w-1/2">
                 <div className="label">
-                  <span className="label-text font-bold">Type</span>
+                  <span className="label-text font-bold">Short description</span>
                 </div>
                 <input
                   type="text"
-                  name="type"
-                  placeholder="Type"
+                  required
+                  name="short_description"
+                  placeholder="Short description"
                   className="input border-none w-full "
                 />
               </label>
             </div>
-            <div className="mb-6">
-              <label className="form-control md:w-full ">
-                <div className="label">
-                  <span className="label-text font-bold">Photo URL</span>
-                </div>
-                <input
-                  type="text"
-                  placeholder="photo URL"
-                  name="photo"
-                  className="input border-none w-full "
-                />
-              </label>
-            </div>
+            
           </div>
+          <div className="mt-6">
           <input
             type="submit"
             value="Add Books"
             className="font-bold text-red-500 btn btn-outline w-full"
           />
+          </div>
         </form>
-       <Link to="/" className="font-bold mt-3 text-red-500 btn btn-outline w-full">Go Home</Link>
+        <Link
+          to="/"
+          className="font-bold mt-3 text-red-500 btn btn-outline w-full"
+        >
+          Go Home
+        </Link>
       </div>
     </div>
-    );
+  );
 };
 
 export default AddBook;

@@ -5,11 +5,11 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import Button from "../ui/Button";
-import Hr from "../ui/Hr";
+import LoadingB from "../ui/LoadingB";
 
 const Banner = () => {
   return (
-    <div className="lg:flex bg-[#f2f0ee] mt-2 ">
+    <div className="lg:flex bg-[#f2f0ee] mt-2 mb-6">
       <div className="lg:w-[70%]">
         <Swiper
           pagination={{
@@ -92,11 +92,11 @@ const Banner = () => {
         </Swiper>
       </div>
       <div className="">
-        <div className="">
+        <div className="md:flex lg:flex-col items-center justify-center">
           <div className="px-9 py-5 space-y-3">
             {/* 1st  */}
             <h2 className="text-3xl font-bold ">Library Guides</h2>
-            <Hr></Hr>
+            <LoadingB></LoadingB>
             <p className="font-semibold font-sans">
               Find books, media, databases, e-journals and digital resources.
             </p>
@@ -105,7 +105,7 @@ const Banner = () => {
           <div className="px-9 py-5 space-y-3">
             {/* 2nd */}
             <h2 className="text-3xl font-bold ">Borrow, Reserve, Renew</h2>
-            <Hr></Hr>
+            <LoadingB></LoadingB>
             <p className="font-semibold font-sans">
               Get advanced research assistance in dozens of subject areas.
             </p>
@@ -114,7 +114,7 @@ const Banner = () => {
           <div className="px-9 py-5 space-y-3">
             {/* 3rd */}
             <h2 className="text-3xl font-bold ">Study Spaces & PCs</h2>
-            <Hr></Hr>
+            <LoadingB></LoadingB>
             <p className="font-semibold font-sans">
               Deposit data, papers, and other resources for long-term access.
             </p>

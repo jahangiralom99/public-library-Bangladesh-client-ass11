@@ -7,42 +7,98 @@ import AllBooks from "../Pages/AllBooks/AllBooks";
 import SpacesRooms from "../Pages/SpacesRooms/SpacesRooms";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import PrivetRoute from "./PrivetRoute";
+import History from "../Pages/History/History";
+import BookDetails from "../Pages/BookDetails/BookDetails";
+import Business from "../Pages/Business/Business";
+import AirtMusic from "../Pages/AirtMusic/AirtMusic";
+import Technology from "../Pages/Technology/Technology";
+import ErrPage from "../Pages/ErrPage/ErrPage";
 
 const Root = createBrowserRouter([
-    {
-        path: "/",
-        element: <MainLayout></MainLayout>,
-        children: [
-            {
-                index: true,
-                element: <Home></Home>
-            },
-            {
-                path: "add-Book",
-                element: <AddBook></AddBook>
-            },
-            {
-                path: "all-Books",
-                element: <AllBooks></AllBooks>
-            },
-            {
-                path: "borrowed-Books",
-                element: <BorrowedBooks></BorrowedBooks>
-            },
-            {
-                path: "spaces-rooms",
-                element: <SpacesRooms></SpacesRooms>
-            },
-            {
-                path: "login",
-                element: <Login></Login>
-            },
-            {
-                path: "register",
-                element: <Register></Register>
-            },
-        ]
-    }
-])
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    errorElement: <ErrPage></ErrPage>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+      },
+      {
+        path: "history",
+        element: (
+          <PrivetRoute>
+            <History></History>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "business",
+        element: (
+          <PrivetRoute>
+            <Business></Business>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "airt-music",
+        element: (
+          <PrivetRoute>
+            <AirtMusic></AirtMusic>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "computer-tech",
+        element: (
+          <PrivetRoute>
+            <Technology></Technology>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "add-Book",
+        element: (
+          <PrivetRoute>
+            <AddBook></AddBook>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "all-Books",
+        element: (
+          <PrivetRoute>
+            <AllBooks></AllBooks>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/books/:id",
+        element: (
+          <PrivetRoute>
+            <BookDetails></BookDetails>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "borrowed-Books",
+        element: <PrivetRoute><BorrowedBooks></BorrowedBooks></PrivetRoute>,
+      },
+      {
+        path: "spaces-rooms",
+        element: <SpacesRooms></SpacesRooms>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "register",
+        element: <Register></Register>,
+      },
+    ],
+  },
+]);
 
 export default Root;
