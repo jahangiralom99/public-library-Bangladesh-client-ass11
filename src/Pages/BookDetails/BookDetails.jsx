@@ -15,10 +15,10 @@ const BookDetails = () => {
   const { user } = useAuth();
   // eslint-disable-next-line no-unused-vars
   const [value, setValue] = useState(null);
-  const [updateQuantity, setQuantity] = useState();
+  const [isMew, setNew]= useState('');
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["business"],
+  const { data, isLoading,  } = useQuery({
+    queryKey: ["business", isMew],
     queryFn: () => {
       return axios.get(`/all-books/${id}`);
     },
@@ -39,19 +39,11 @@ const BookDetails = () => {
     quantity,
   } = data.data || {};
   const rat = Math.round(rating);
-
-  // handleSubmit
-
-  const handleBtn = () => {
-    if (data.data.quantity > 0) {
-      
-    }
-    
-  };
-  console.log("update Qy",updateQuantity);
   
+  console.log(quantity-1);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     const from = e.target;
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -65,20 +57,39 @@ const BookDetails = () => {
       borrowed_date,
       userName: user?.displayName,
       userEmail: user?.email,
+      category
     };
 
     const toastId = toast.loading("Loading...");
 
+    // const update = {
+    //   quantity: 12,
+    // }
+
     try {
-      const { data } = await axios.post("/create-borrowed-books===", profile);
+      const { data } = await axios.post("/create-borrowed-books", profile);
+      console.log(_id);
       if (data.acknowledged) {
-        toast.success("Borrowed Books Added Success", { id: toastId });
+        toast.success("Borrowed Books Added Success", { id: toastId }); 
+        if (quantity > 0) {
+          const updated = await axios.put(`quantity-update/${_id}`, { quantity: quantity - 1 });
+        console.log(updated);
+        if (updated.data.acknowledged) {
+          // return setNew("disabled")
+          setNew(updated.data.modifiedCount + 1)
+         
+        }
+        console.log(updated);
+        }
+    
         from.reset();
       }
     } catch (err) {
       toast.error(err.message, { id: toastId });
     }
   };
+
+  console.log(isMew);
 
   return (
     <div>
@@ -111,7 +122,7 @@ const BookDetails = () => {
               {short_description}
             </p>
             <div className="flex justify-between">
-              <div
+              <div className="disabled"
                 onClick={() =>
                   document.getElementById("my_modal_1").showModal()
                 }
@@ -122,8 +133,7 @@ const BookDetails = () => {
                 <Button>Read</Button>
               </Link>
             </div>
-            <div onClick={handleBtn}>
-              <Button>Quantity</Button>
+            <div>
             </div>
             <p>Author Name : {author_name}</p>
             <p>category : {category}</p>

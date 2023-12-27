@@ -2,184 +2,76 @@ import { useQuery } from "react-query";
 import useAxios from "../../Hooks/useAxios";
 import LoadingPage from "../../Components/ui/LoadingPage";
 import { auth } from "../../firebase/firebase.confiq";
+import TopBar from "../../Components/Common/TopBar";
 
 const BorrowedBooks = () => {
   const axios = useAxios();
 
-  const { data, isLoading, } = useQuery({
-    queryKey: ["borrowed",],
-    queryFn: async() => {
-      const email = auth.currentUser.email
+  const { data, isLoading } = useQuery({
+    queryKey: ["borrowed"],
+    queryFn: async () => {
+      const email = auth.currentUser.email;
       console.log(email);
-      return await axios.get(`/borrowed-books?email=${email}`);
-      },
+      return await axios.get(`/borrowed-books?userEmail=${email}`);
+    },
   });
 
   if (isLoading) {
-    return <LoadingPage></LoadingPage>
+    return <LoadingPage></LoadingPage>;
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
-    <div>
-      <div className="overflow-x-auto">
+    <div className="mt-4">
+      <TopBar></TopBar>
+      <div className="overflow-x-auto mt-12">
         <table className="table">
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
+              <th className="font-bold text-xl">Photo</th>
+              <th className="font-bold text-xl">Name</th>
+              <th className="font-bold text-xl">Return Date</th>
+              <th className="font-bold text-xl">Borrowed Date</th>
+              <th className="font-bold text-xl">category</th>
+              <th className="font-bold text-xl">Status</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-2@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+            {data?.data.map((book) => {
+              const { image, returnDate, borrowed_date, userName, category } =
+                book || {};
+              return (
+                <tr key={book._id}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img
+                            src={image}
+                            alt="Avatar Tailwind CSS Component"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                    <div className="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Zemlak, Daniel and Leannon
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Desktop Support Technician
-                </span>
-              </td>
-              <td>Purple</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 2 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-3@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Brice Swyre</div>
-                    <div className="text-sm opacity-50">China</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Carroll Group
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Tax Accountant
-                </span>
-              </td>
-              <td>Red</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 3 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-4@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Marjy Ferencz</div>
-                    <div className="text-sm opacity-50">Russia</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Rowe-Schoen
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Office Assistant I
-                </span>
-              </td>
-              <td>Crimson</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 4 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-5@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Yancy Tear</div>
-                    <div className="text-sm opacity-50">Brazil</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Wyman-Ledner
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Community Outreach Specialist
-                </span>
-              </td>
-              <td>Indigo</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
+                  </td>
+                  <td>
+                    {userName}
+                    <br />
+                  </td>
+                  <td>{returnDate}</td>
+                  <td>{borrowed_date}</td>
+                  <th>
+                    {category}
+                  </th>
+                  <th>
+                    <button className="btn btn-ghost btn-xs">Return</button>
+                  </th>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

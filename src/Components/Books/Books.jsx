@@ -28,7 +28,7 @@ const Books = ({ allBook }) => {
         <h2 className="card-title">{name}</h2>
         <Hr></Hr>
         <p>Author by -{author_name}</p>
-        <p className="font-bold">Quantity -{quantity}</p>
+        <p className="font-bold">Quantity : {quantity}</p>
         <div className="card flex justify-content-center text-red-500">
           <h1 className="font-bold">Rating : {rating}</h1>
           <Rating

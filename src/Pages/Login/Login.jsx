@@ -25,7 +25,8 @@ const Login = () => {
     try {
       
       const users = await logInUser(email, password);
-      const res = await axios.post("/create-jwt-token",{email: users.user.email,});
+      const userEmail = users.user.email
+      const res = await axios.post("/create-jwt-token",{userEmail});
       console.log(res);
       toast.success("logged in successfully...", { id: toastId });
       navigate(location?.state? location.state : "/")

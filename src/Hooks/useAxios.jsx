@@ -15,6 +15,7 @@ const useAxios = () => {
       if (error.response.status === 401 || error.response.status === 403) {
         logOut();
       }
+      console.log(error.response.status);
     }
   );
   return instance;

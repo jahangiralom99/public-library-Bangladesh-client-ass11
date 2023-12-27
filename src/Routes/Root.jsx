@@ -83,11 +83,19 @@ const Root = createBrowserRouter([
       },
       {
         path: "borrowed-Books",
-        element: <PrivetRoute><BorrowedBooks></BorrowedBooks></PrivetRoute>,
+        element: (
+          <PrivetRoute>
+            <BorrowedBooks></BorrowedBooks>
+          </PrivetRoute>
+        ),
       },
       {
         path: "spaces-rooms",
-        element: <SpacesRooms></SpacesRooms>,
+        element: (
+          <PrivetRoute>
+            <SpacesRooms></SpacesRooms>
+          </PrivetRoute>
+        ),
       },
       {
         path: "login",
