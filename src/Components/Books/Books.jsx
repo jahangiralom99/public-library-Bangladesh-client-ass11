@@ -32,15 +32,17 @@ const Books = ({ allBook }) => {
         <div className="card flex justify-content-center text-red-500">
           <h1 className="font-bold">Rating : {rating}</h1>
           <Rating
-            style={{ color: "var(--red-400)" }}
             value={rat}
             onChange={(e) => setValue(e.value)}
             cancel={false}
           />
         </div>
         <div className="card-actions justify-end">
-          <Link data-tip="details" to={`/books/${_id}`} className="flex btn btn-outline items-center justify-center w-full tooltip tooltip-bottom">
+          <Link data-tip="details" to={`/books/${_id}`} className="flex btn btn-outline items-center justify-center w-full tooltip tooltip-top">
             <BsFillInfoCircleFill className="text-5xl text-red-500 hover:text-red-700"/>
+          </Link>
+          <Link data-tip="update book" to={`/update/${_id}`} className="flex btn btn-outline items-center justify-center w-full tooltip tooltip-top">
+            Update
           </Link>
         </div>
       </div>

@@ -11,7 +11,6 @@ const BorrowedBooks = () => {
     queryKey: ["borrowed"],
     queryFn: async () => {
       const email = auth.currentUser.email;
-      console.log(email);
       return await axios.get(`/borrowed-books?userEmail=${email}`);
     },
   });
@@ -20,11 +19,9 @@ const BorrowedBooks = () => {
     return <LoadingPage></LoadingPage>;
   }
 
-  // console.log(data);
-
   return (
     <div className="mt-4">
-      <TopBar></TopBar>
+      <TopBar>Borrowed-book</TopBar>
       <div className="overflow-x-auto mt-12">
         <table className="table">
           {/* head */}

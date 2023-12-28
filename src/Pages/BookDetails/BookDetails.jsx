@@ -15,9 +15,10 @@ const BookDetails = () => {
   const { user } = useAuth();
   // eslint-disable-next-line no-unused-vars
   const [value, setValue] = useState(null);
-  const [isMew, setNew]= useState('');
+  const [isMew, setNew] = useState("");
+  const [disabled, setDisabled] = useState("");
 
-  const { data, isLoading,  } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["business", isMew],
     queryFn: () => {
       return axios.get(`/all-books/${id}`);
@@ -39,11 +40,12 @@ const BookDetails = () => {
     quantity,
   } = data.data || {};
   const rat = Math.round(rating);
-  
-  console.log(quantity-1);
+
+  // console.log(quantity - 1);
+  // handle Submit btn
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const from = e.target;
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -57,31 +59,30 @@ const BookDetails = () => {
       borrowed_date,
       userName: user?.displayName,
       userEmail: user?.email,
-      category
+      category,
     };
-
     const toastId = toast.loading("Loading...");
-
-    // const update = {
-    //   quantity: 12,
-    // }
 
     try {
       const { data } = await axios.post("/create-borrowed-books", profile);
       console.log(_id);
       if (data.acknowledged) {
-        toast.success("Borrowed Books Added Success", { id: toastId }); 
-        if (quantity > 0) {
-          const updated = await axios.put(`quantity-update/${_id}`, { quantity: quantity - 1 });
-        console.log(updated);
-        if (updated.data.acknowledged) {
-          // return setNew("disabled")
-          setNew(updated.data.modifiedCount + 1)
-         
+        toast.success("Borrowed Books Added Success", { id: toastId });
+        if (quantity >1) {
+          return setDisabled('disabled')
+        } else {
+          const updated = await axios.put(`quantity-update/${_id}`, {
+            quantity: 3,
+          });
+          console.log(updated);
+          if (updated.data.acknowledged) {
+            // return setNew("disabled")
+            setNew(updated.data.modifiedCount + 1);
+            
+          }
+          console.log(updated);
         }
-        console.log(updated);
-        }
-    
+
         from.reset();
       }
     } catch (err) {
@@ -89,7 +90,7 @@ const BookDetails = () => {
     }
   };
 
-  console.log(isMew);
+  console.log(disabled);
 
   return (
     <div>
@@ -122,19 +123,17 @@ const BookDetails = () => {
               {short_description}
             </p>
             <div className="flex justify-between">
-              <div className="disabled"
-                onClick={() =>
-                  document.getElementById("my_modal_1").showModal()
-                }
+              <div
               >
-                <Button>Borrowed</Button>
+                <button onClick={() =>
+                  document.getElementById("my_modal_1").showModal()
+                } disabled={disabled} className="btn">Borrowed</button>
               </div>
               <Link to={`/${_id}`}>
                 <Button>Read</Button>
               </Link>
             </div>
-            <div>
-            </div>
+            <div></div>
             <p>Author Name : {author_name}</p>
             <p>category : {category}</p>
           </div>
@@ -186,8 +185,3 @@ const BookDetails = () => {
 };
 
 export default BookDetails;
-
-
-
-
-

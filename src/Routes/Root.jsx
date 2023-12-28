@@ -14,6 +14,7 @@ import Business from "../Pages/Business/Business";
 import AirtMusic from "../Pages/AirtMusic/AirtMusic";
 import Technology from "../Pages/Technology/Technology";
 import ErrPage from "../Pages/ErrPage/ErrPage";
+import UpdateBook from "../Pages/UpdateBook/UpdateBook";
 
 const Root = createBrowserRouter([
   {
@@ -78,6 +79,14 @@ const Root = createBrowserRouter([
         element: (
           <PrivetRoute>
             <BookDetails></BookDetails>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PrivetRoute>
+            <UpdateBook></UpdateBook>
           </PrivetRoute>
         ),
       },
