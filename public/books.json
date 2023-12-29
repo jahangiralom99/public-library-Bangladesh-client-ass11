@@ -1,147 +1,26 @@
 [
-    {
-      "image": "https://i.postimg.cc/FHN9tXtB/chirle.jpg",
-      "rating": 4.9,
-      "name": "Carrie Chapman Catt",
-      "quantity": 8,
-      "author_name": "Jacqueline Van Voris",
-      "category": "History",
-      "short_description": "Carrie Chapman Catt, founder of the League of Women Voters and the International Alliance of Women, was a leader of the women's suffrage movement and a tireless campaigner for giving women the right to vote. She and suffragist Nettie Rogers Shuler reveal the inside story of the struggle from 1848 to 1922."
-    },
-    {
-      "image": "https://i.postimg.cc/T3dpVDP1/mosque.jpg",
-      "rating": 4.6,
-      "name": "The Mosque",
-      "quantity": 14,
-      "author_name": "David Macaulay",
-      "category": "History",
-      "short_description": "An author and artist who has continually stripped away the mystique of architectural structures that have long fascinated modern people, David Macaulay here reveals the methods and materials used to design and construct a mosque in late-sixteenth- century Turkey."
-    },
-    {
-      "image": "https://i.postimg.cc/jdJGMgLk/photgrphy.jpg",
-      "rating": 4.0,
-      "name": "A History of Photography in 50 Cameras",
-      "quantity": 11,
-      "author_name": "Michael Pritchard",
-      "category": "History",
-      "short_description": "A History of Photography in 50 Cameras explores the 180-year story of perhaps the most widely used device ever built. It covers cameras in all forms, revealing the origins and development of each model and tracing the stories of the photographers who used and popularized them."
-    },
-    {
-      "image": "https://i.postimg.cc/FKLjkSRq/Bangladesh-A-Legacy-of-Blood.jpgg",
-      "rating": 4.5,
-      "name": "Bangladesh A Legacy of Blood",
-      "quantity": 18,
-      "author_name": "Anthony Mascarenhas",
-      "category": "History",
-      "short_description": "Mascarenhas describes his own book thus This book is the unvarnished story of their (the early leaders of Bangladesh) times, essentially the sad history of the first 10 years of Bangladesh. It is based on my close personal knowledge of the main protagonists; on more than 120 separate interviews with the men and women involved in the dramatic events"
-    },
-    {
-      "image": "https://i.postimg.cc/wTmKjqYB/Piano-Adventures.jpg",
-      "rating": 4.8,
-      "name": "Piano Adventures",
-      "quantity": 6,
-      "author_name": "Nancy Faber",
-      "category": "Arts and Music",
-      "short_description": "The 2nd Edition Theory Book provides instruction, reinforcement, and creative applications of basic theory concepts. Students will enjoy note-naming with StoryRhymes, explore improvisation, and engage with eye-training and ear-training activities all within a fun-filled context tied thematically to the Level 1 Lesson Book pieces."
-    },
-    {
-      "image": "https://i.postimg.cc/nLZsYK89/FOLK-MELODY.jpg",
-      "rating": 4.4,
-      "name": "Folk Melody of Bangladesh",
-      "quantity": 8,
-      "author_name": "Iftekhar Anear",
-      "category": "Arts and Music",
-      "short_description": "The book takes a step towards modernity of the folk music of Bangladesh. “Modernity” being initially a western concept is often misinterpreted in this subcontinent. It does not amount to undermining our collective memories, traditions, art, and music; rather involves taking steps to applying rational thinking in every discipline. The author of this book aims exactly that, bringing our folk songs to the realms of modernity so that new musicians, scholars, and teachers of this country and all around the world can learn, teach, and be inspired by it."
-    },
-    {
-      "image": "https://i.postimg.cc/BnX65qnD/airt-and-music-2.jpg",
-      "rating": 4.2,
-      "name": "Art and life in Bangladesh",
-      "quantity": 14,
-      "author_name": "Henry Glassie",
-      "category": "Arts and Music",
-      "short_description": "Glassie, Henry H. Art and life in Bangladesh. Bloomington: Indiana University Press, 1997, 1st printing number line, 511pp., very good dust-jacket, very good black half-cloth with peach colored boards and gold decorations, fresh attractive copy. Art and Life in Bangladesh presents the country, its landscape and history, its artists and their work.Glassie arrays the potter's works from useful pots to radiant images of the Hindi deities -and brings us into the company of potters who are poets, historians, and philosophers. The book ascends to the splendid spiritual explanation of art provided by the sculptor Haripada Pal."
-    },
-    {
-      "image": "https://i.postimg.cc/7hWG3b0C/bangla.jpg",
-      "rating": 4.5,
-      "name": "Being Music",
-      "quantity": 16,
-      "author_name": "Mark Miller",
-      "category": "Arts and Music",
-      "short_description": "Improvisation is a practice of musical exploration and discovery. What we explore is our lived experience and what we discover we share with our audience. As improvisers, our creative resources include sense perception, imagination, somatic presence, and the vitality of emotional expression. In collaboration we develop relationships that serve the music and balance the priorities of self and others in the ensemble. Being Music describes the craft of improvisation as spontaneous composition including an awareness of form, compositional focus, theme and development,"
-    },
-    {
-        "image": "https://i.postimg.cc/15DJKNvh/steve.jpg",
-        "rating": 4.4,
-        "name": "The Man Who Thought Different",
-        "quantity": 4,
-        "author_name": "Karen Blumenthal",
-        "category": "Computers and Tech",
-        "short_description": "The Man Who Thought Different is a biography on one of the pioneers of the twenty-first century, who lived to change the world and left the world transformed. Behind such a transformative soul was a bereaved childhood and a hardworking youth who started colouring the world with his own shade at the age of twenty and almost touched every sphere of human comfort with his discovery of Apple in his foster parent’s garage with his friend Steve Wozniak. Steve did not stop there, as he also invented Pixar."
-      },
-    {
-        "image": "https://i.postimg.cc/jdCJxVJ8/sui-fi.jpg",
-        "rating": 4.6,
-        "name": "From Sci-Fi to Reality",
-        "quantity": 10,
-        "author_name": "Shah Rukh",
-        "category": "Computers and Tech",
-        "short_description": "From Sci-Fi to Reality: AI in Your Daily Life is a captivating exploration of the remarkable journey that artificial intelligence (AI) has undertaken, from the realms of science fiction to becoming an integral part of our everyday existence. This book unravels the evolution of AI, delving into its myriad applications that have seamlessly woven into the fabric of modern life. From virtual assistants and personalized recommendations to advancements in healthcare, transportation, and more, it paints a vivid picture of how AI is revolutionizing the way we live, work, and interact with the world. "
-      },
-    {
-        "image": "https://i.postimg.cc/C1zzFkRR/mar-tech.jpg",
-        "rating": 4.5,
-        "name": "Mar-Tech: A Marriage Made on Earth",
-        "quantity": 20,
-        "author_name": "Amit Tiwari ",
-        "category": "Computers and Tech",
-        "short_description": "Mar-Tech: a Marriage made on Earth” by Amit Tiwari is a playbook on marketing in the age of Martech. But before the play begins, Amit introduces the players, and you soon discover this is more than a mere match of equals. This is a match where both sides—Marketing and Technology—decide to collaborate rather than compete, totally changing the game, by each combining their home advantage."
-      },
-    {
-        "image": "https://i.postimg.cc/0yYS3YSx/soler.jpg",
-        "rating": 5,
-        "name": "Solar System Surprises",
-        "quantity": 20,
-        "author_name": "Shah Rukh",
-        "category": "Computers and Tech",
-        "short_description": "Solar System Surprises invites readers on an illuminating odyssey through the realms of our cosmic neighborhood. From mysterious moons to enigmatic asteroids, the book unveils the unexpected discoveries and scientific revelations that have reshaped our understanding of the solar system. With engaging narratives and vivid descriptions, this book promises an enthralling exploration, making it a must-read for both budding astronomers and seasoned sky-gazers eager to delve into the hidden wonders of our celestial surroundings."
-      },
-    {
-        "image": "https://i.postimg.cc/tTv5v3xD/law.jpg",
-        "rating": 4.5,
-        "name": "The Law of Success In Sixteen Lessons",
-        "quantity": 10,
-        "author_name": "Napoleon Hill",
-        "category": "Business",
-        "short_description": "Fears are nothing more than a state of mind.”From helping you rid yourself of aimlessness and find a definite purpose to teaching you the art of negotiating harmoniously with others, this course on the fundamentals of success will guide you, lesson by lesson, through the sixteen laws of success, which include mastering fears and increasing self-confidence, inculcating the habit of saving your income, stimulating your imagination, practicing self-control."
-      },
-    {
-        "image": "https://i.postimg.cc/d3qhCp1x/belive.jpg",
-        "rating": 4.5,
-        "name": "Don't Believe Everything You Think",
-        "quantity": 16,
-        "author_name": "Joseph Nguyen",
-        "category": "Business",
-        "short_description": "Discover how to conquer anxiety, self-doubt, and self-sabotage without depending on motivation or willpower. 'Don't Believe Everything You Think' uncovers the core of psychological suffering and offers insights to effortlessly shape the life you crave. Learn to detach from negativity, embrace love and joy, escape negative thought cycles, and tap into inner wisdom. The message is clear: anyone can attain peace, love, and fulfillment, irrespective of their history."
-      },
-    {
-        "image": "https://i.postimg.cc/Zq5ZrmF3/zero.jpg",
-        "rating": 4.5,
-        "name": "Zero to One",
-        "quantity": 8,
-        "author_name": "Peter Thiel",
-        "category": "Business",
-        "short_description": "The next Bill Gates will not build an operating system. The next Larry Page or Sergey Brin won’t make a search engine. If you are copying these guys, you aren’t learning from them. It’s easier to copy a model than to make something new: doing what we already know how to do takes the world from 1 to n, adding more of something familiar. Every new creation goes from 0 to 1. This book is about how to get there."
-      },
-    {
-        "image": "https://i.postimg.cc/jjw3VkRm/deep.jpg",
-        "rating": 4.6,
-        "name": "Deep Work",
-        "quantity": 8,
-        "author_name": "Cal Newport",
-        "category": "Business",
-        "short_description": "Deep work is the ability to focus without distraction on a cognitively demanding task. Coined by author and professor Cal Newport on his popular blog Study Hacks, deep work will make you better at what you do, let you achieve more in less time and provide the sense of true fulfilment that comes from the mastery of a skill. In short, deep work is like a superpower in our increasingly competitive economy."
-      }
-  ]
-  
+  {
+    "name": "Reading Rooms",
+    "image": "https://i.postimg.cc/7ZfvDpfG/post-29-copyright.jpg",
+    "title": "Silent Study Spaces",
+    "description": "Silent study spaces include closed reading rooms, computer classrooms, and designated areas within the Library indicated by signage. No talking or conversation is permitted. Silence is required in these spaces at all times."
+  },
+  {
+    "name": "Group Study Rooms",
+    "image": "Collaborative Study Spaces",
+    "title": "Graphic Designer",
+    "description": "Collaborative spaces include group study rooms and designated areas within the Library indicated by signage. Speaking softly is allowed in collaborative areas, but not loud talking. Long cellphone conversations should be done outside of the Library."
+  },
+  {
+    "name": "Silent Study Zones",
+    "image": "https://i.postimg.cc/Pr0pQksT/post-28-copyright.jpg",
+    "title": "Zero-Noise Study Spaces",
+    "description": "Zero-noise room has been set aside to provide a peaceful oasis for quiet reflection. Absolute silence is required in the zero-noise room. No keyboarding or talking is permitted. Advance reservation is required."
+  },
+  {
+    "name": "Events & Special Occasions",
+    "image": "",
+    "title": "Meeting & Event Function Rooms",
+    "description":"Whether you’re hosting a Board, Corporate or Association meeting, Workshop or Information Session, the Scientia Public Library’s Meetings & Event Services department can provide you with a variety of meeting and function rooms."
+  }
+]

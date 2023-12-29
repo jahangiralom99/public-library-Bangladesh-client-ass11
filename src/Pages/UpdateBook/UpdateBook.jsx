@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import LoadingB from "../../Components/ui/LoadingB";
 import { useQuery } from "react-query";
 import useAxios from "../../Hooks/useAxios";
@@ -9,7 +9,10 @@ import toast from "react-hot-toast";
 const UpdateBook = () => {
   const [isCategory, setCategory] = useState('');
   const { id } = useParams();
-  const axios = useAxios();
+    const axios = useAxios();
+    const location = useLocation();
+    const navigate = useNavigate();
+
 
   const { data, isLoading } = useQuery({
     queryKey: ["business"],
@@ -56,7 +59,8 @@ const UpdateBook = () => {
       try {
           const res = await axios.patch(`/update-books/${_id}`, updateBooks);
           if (res.data.modifiedCount > 0) {
-              toast.success("Book updated successfully", {id: tostID })
+              toast.success("Book updated successfully", { id: tostID });
+              navigate(location?.state? location.state : "/")
           }
       } catch (err) {
         //   console.log(err);

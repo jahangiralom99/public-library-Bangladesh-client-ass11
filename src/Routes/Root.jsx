@@ -15,6 +15,7 @@ import AirtMusic from "../Pages/AirtMusic/AirtMusic";
 import Technology from "../Pages/Technology/Technology";
 import ErrPage from "../Pages/ErrPage/ErrPage";
 import UpdateBook from "../Pages/UpdateBook/UpdateBook";
+import ReadBook from "../Pages/ReadBook/ReadBook";
 
 const Root = createBrowserRouter([
   {
@@ -87,6 +88,14 @@ const Root = createBrowserRouter([
         element: (
           <PrivetRoute>
             <UpdateBook></UpdateBook>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/read/:id",
+        element: (
+          <PrivetRoute>
+           <ReadBook></ReadBook>
           </PrivetRoute>
         ),
       },

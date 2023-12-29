@@ -3,60 +3,72 @@ import { BsEyeFill, BsEyeSlashFill, BsGoogle } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxios from "../../Hooks/useAxios";
 
 const Register = () => {
-    const [isShow, setIsShow] = useState(false);
-    const [error, setError] = useState(null);
-  const { createUser, updateName, user } = useAuth();
+  const [isShow, setIsShow] = useState(false);
+  const [error, setError] = useState(null);
+  const { createUser, updateName, googleLogIn } = useAuth();
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const axios = useAxios();
 
-    const handleSubmitBtn = async(e) => {
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const photo = form.photo.value;
-        const email = form.email.value;
-        const password = form.password.value;
+  const handleSubmitBtn = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
 
-        
-        setError('');
-
-        if (password.length < 6) {
-            setError("Password must be at least 6 characters");
-          return;
-        }
-        else if (!/(?=.*?[A-Z])/.test(password)) {
-           setError("Password must be at least one Upper Case character");
-          return;
-        }
-        else if (!/(?=.*?[#?!@$%^&*-])/.test(password)){
-          setError("Password at least one special character");
-          return;
-        }
-
-        const toastId = toast.loading("Please wait...");
-
-      // login 
-        try {
-            const user = await createUser(email, password);
-            await updateName(name, photo);
-            console.log(user);
-          toast.success("logged in successfully...", { id: toastId });
-          navigate(location?.state? location.state : "/")
-
-        }catch(err) {
-            console.log(err);
-            setError(err.message)
-            toast.error(err.message, { id: toastId });
-        }
+    setError("");
+// password Handle 
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    } else if (!/(?=.*?[A-Z])/.test(password)) {
+      setError("Password must be at least one Upper Case character");
+      return;
+    } else if (!/(?=.*?[#?!@$%^&*-])/.test(password)) {
+      setError("Password at least one special character");
+      return;
     }
 
+    const toastId = toast.loading("Please wait...");
 
-    console.log(user);
+    // login
+    try {
+      const users = await createUser(email, password);
+      await updateName(name, photo);
+      const userEmail = users.user.email;
+      const res = await axios.post("/create-jwt-token", { userEmail });
+      console.log(res);
+      toast.success("logged in successfully...", { id: toastId });
+      navigate(location?.state ? location.state : "/");
+    } catch (err) {
+      setError(err.message);
+      toast.error(err.message, { id: toastId });
+    }
+  };
 
-    return (
-        <div className="px-6">
+
+  // handle Google Login
+  const handleGoogle = async () => {
+    const toastID = toast.loading("Google logged in.............");
+    try {
+      const users = await googleLogIn();
+      const userEmail = users.user.email;
+      await axios.post("/create-jwt-token", { userEmail });
+      toast.success("Google logged in Successfully", { id: toastID });
+      navigate(location?.state ? location.state : "/");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message, { id: toastID });
+    }
+  };
+
+  return (
+    <div className="px-6">
       <div className="flex items-center min-h-full flex-1 flex-col md:flex-row justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
           <img
@@ -65,8 +77,8 @@ const Register = () => {
             alt="Your Company"
           />
         </div>
-              <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-              <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight ">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight ">
             Please Register
           </h2>
           <form onSubmit={handleSubmitBtn} className="space-y-6 mt-12">
@@ -185,26 +197,28 @@ const Register = () => {
             )}
           </div>
           <div className="flex justify-center mb-6">
-        <div className="text-center">
-          <button className="btn btn-outline btn-primary">
-            <BsGoogle className="text-red-500" />
-            Log in with
-            <div>
-              <span className="text-[#008744]">G</span>
-              <span className="text-red-500">o</span>
-              <span className="text-[#ffa700]">o</span>
-              <span className="text-[#008744]">g</span>
-              <span className="text-[#009955]">l</span>
-              <span className="">e</span>
+            <div className="text-center">
+              <button
+                onClick={handleGoogle}
+                className="btn btn-outline btn-primary"
+              >
+                <BsGoogle className="text-red-500" />
+                Log in with
+                <div>
+                  <span className="text-[#008744]">G</span>
+                  <span className="text-red-500">o</span>
+                  <span className="text-[#ffa700]">o</span>
+                  <span className="text-[#008744]">g</span>
+                  <span className="text-[#009955]">l</span>
+                  <span className="">e</span>
+                </div>
+              </button>
             </div>
-          </button>
+          </div>
         </div>
       </div>
-        </div>
-      </div>
-      
     </div>
-    );
+  );
 };
 
 export default Register;

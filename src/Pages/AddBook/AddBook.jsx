@@ -2,12 +2,18 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxios from "../../Hooks/useAxios";
 import toast from "react-hot-toast";
 import LoadingB from "../../Components/ui/LoadingB";
+import { useState } from "react";
 
 const AddBook = () => {
   const axios = useAxios() 
+  const [isCategory, setCategory] = useState('');
   const location = useLocation();
   const navigate = useNavigate()
 
+
+  const handleSelectChange = (e) => {
+    setCategory(e.target.value);
+  }
 
   const handleUpdateBtn = async(e) => {
     e.preventDefault();
@@ -18,9 +24,10 @@ const AddBook = () => {
       name: form.name.value,
       quantity: form.quantity.value,
       author_name: form.author_name.value,
-      category: form.category.value,
+      category: isCategory,
       short_description: form.short_description.value,
     };
+    console.log(addBooks);
 
     const toastID = toast.loading("Please wait...")
 
@@ -35,6 +42,7 @@ const AddBook = () => {
       toast.error(err.message, {id: toastID})
       console.log(err);
     }
+
     
   };
 
@@ -123,13 +131,20 @@ const AddBook = () => {
                 <div className="label">
                   <span className="label-text font-bold">Category</span>
                 </div>
-                <input
-                  type="text"
-                  required
-                  placeholder="Category"
-                  name="category"
-                  className="input border-none  w-full "
-                />
+                <select
+                  className="h-12 rounded-lg px-3"
+                  onChange={handleSelectChange}
+                  value={isCategory}
+                  id="dropdown"
+                >
+                  <option value="">Select Category</option>
+                  <option  value="Computers and Tech">
+                    Computers & Technology
+                  </option>
+                  <option value="History">History</option>
+                  <option value="Business">Business</option>
+                  <option value="Arts and Music">Airt and Music</option>
+                </select>
               </label>
               <label className="form-control md:w-1/2">
                 <div className="label">

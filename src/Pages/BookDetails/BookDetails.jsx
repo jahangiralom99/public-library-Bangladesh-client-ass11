@@ -18,16 +18,13 @@ const BookDetails = () => {
   const [isMew, setNew] = useState("");
   const [disabled, setDisabled] = useState("");
 
-  const { data, isLoading } = useQuery({
+  // Load Data \
+  const { data, isLoading, } = useQuery({
     queryKey: ["business", isMew],
     queryFn: () => {
       return axios.get(`/all-books/${id}`);
     },
   });
-
-  if (isLoading) {
-    return <LoadingPage></LoadingPage>;
-  }
 
   const {
     _id,
@@ -38,10 +35,10 @@ const BookDetails = () => {
     rating,
     short_description,
     quantity,
-  } = data.data || {};
+  } = data?.data || {};
   const rat = Math.round(rating);
 
-  // console.log(quantity - 1);
+
   // handle Submit btn
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,14 +62,12 @@ const BookDetails = () => {
 
     try {
       const { data } = await axios.post("/create-borrowed-books", profile);
-      console.log(_id);
+   
       if (data.acknowledged) {
         toast.success("Borrowed Books Added Success", { id: toastId });
-        if (quantity >1) {
-          return setDisabled('disabled')
-        } else {
+        if (quantity >= 1) {
           const updated = await axios.put(`quantity-update/${_id}`, {
-            quantity: 3,
+            quantity: quantity -1,
           });
           console.log(updated);
           if (updated.data.acknowledged) {
@@ -81,6 +76,8 @@ const BookDetails = () => {
             
           }
           console.log(updated);
+        } else {
+          return setDisabled('disabled')
         }
 
         from.reset();
@@ -90,7 +87,10 @@ const BookDetails = () => {
     }
   };
 
-  console.log(disabled);
+  if (isLoading) {
+    return <LoadingPage></LoadingPage>;
+  }
+
 
   return (
     <div>
@@ -129,7 +129,7 @@ const BookDetails = () => {
                   document.getElementById("my_modal_1").showModal()
                 } disabled={disabled} className="btn">Borrowed</button>
               </div>
-              <Link to={`/${_id}`}>
+              <Link to={`/read/${_id}`}>
                 <Button>Read</Button>
               </Link>
             </div>

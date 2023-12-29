@@ -1,19 +1,38 @@
-import { useQuery } from "react-query";
+import {  useMutation, useQuery, useQueryClient } from "react-query";
 import useAxios from "../../Hooks/useAxios";
 import LoadingPage from "../../Components/ui/LoadingPage";
 import { auth } from "../../firebase/firebase.confiq";
 import TopBar from "../../Components/Common/TopBar";
+import toast from "react-hot-toast";
 
 const BorrowedBooks = () => {
+  
   const axios = useAxios();
+  // const [isDelate, setDelate] = useState()
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading ,} = useQuery({
     queryKey: ["borrowed"],
     queryFn: async () => {
       const email = auth.currentUser.email;
       return await axios.get(`/borrowed-books?userEmail=${email}`);
     },
   });
+
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationKey: ["borrowed"],
+    mutationFn: async (id) => {
+      return await axios.delete(`/delete-book/${id}`);
+     
+
+    }, 
+    onSuccess: () => {
+      toast.success("Book Returns successfully");
+      queryClient.invalidateQueries({queryKey : "borrowed"})
+    }
+  })
 
   if (isLoading) {
     return <LoadingPage></LoadingPage>;
@@ -38,7 +57,7 @@ const BorrowedBooks = () => {
           <tbody>
             {/* row 1 */}
             {data?.data.map((book) => {
-              const { image, returnDate, borrowed_date, userName, category } =
+              const { image, returnDate, borrowed_date, userName, category, _id } =
                 book || {};
               return (
                 <tr key={book._id}>
@@ -64,7 +83,7 @@ const BorrowedBooks = () => {
                     {category}
                   </th>
                   <th>
-                    <button className="btn btn-ghost btn-xs">Return</button>
+                    <button onClick={()=>mutate(_id)} className="btn btn-ghost btn-xs">Return</button>
                   </th>
                 </tr>
               );

@@ -26,8 +26,8 @@ const Login = () => {
       
       const users = await logInUser(email, password);
       const userEmail = users.user.email
-      const res = await axios.post("/create-jwt-token",{userEmail});
-      console.log(res);
+       await axios.post("/create-jwt-token",{userEmail});
+
       toast.success("logged in successfully...", { id: toastId });
       navigate(location?.state? location.state : "/")
       
@@ -40,7 +40,9 @@ const Login = () => {
   const handleGoogle = async () => {
     const toastID = toast.loading("Google logged in.............");
     try {
-      await googleLogIn();
+      const users = await googleLogIn();
+      const userEmail = users.user.email;
+      await axios.post("/create-jwt-token", { userEmail });
       toast.success("Google logged in Successfully", { id: toastID });
       navigate(location?.state? location.state : "/")
     } catch (err) {
