@@ -7,12 +7,11 @@ import LoadingPage from "../../Components/ui/LoadingPage";
 import toast from "react-hot-toast";
 
 const UpdateBook = () => {
-  const [isCategory, setCategory] = useState('');
+  const [isCategory, setCategory] = useState("");
   const { id } = useParams();
-    const axios = useAxios();
-    const location = useLocation();
-    const navigate = useNavigate();
-
+  const axios = useAxios();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const { data, isLoading } = useQuery({
     queryKey: ["business"],
@@ -37,50 +36,48 @@ const UpdateBook = () => {
   } = data.data || {};
 
   // Handler function for when the selection changes
-    const handleSelectChange = (e) => {
-        setCategory(e.target.value);
+  const handleSelectChange = (e) => {
+    setCategory(e.target.value);
+  };
+  // console.log(isCategory);
+
+  const handleUpdateBtn = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const updateBooks = {
+      image: form.image.value,
+      rating: form.rating.value,
+      name: form.name.value,
+      quantity: form.quantity.value,
+      author_name: form.author_name.value,
+      category: isCategory || category,
+      short_description: form.short_description.value,
     };
-    // console.log(isCategory);
+    const tostID = toast.loading("please wait...");
 
-  const handleUpdateBtn = async(e) => {
-      e.preventDefault();
-      const form = e.target;
-      const updateBooks = {
-        image: form.image.value,
-        rating: form.rating.value,
-        name: form.name.value,
-        quantity: form.quantity.value,
-        author_name: form.author_name.value,
-        category: isCategory || category,
-        short_description: form.short_description.value,
-      };
-      const tostID = toast.loading("please wait...");
-
-      try {
-          const res = await axios.patch(`/update-books/${_id}`, updateBooks);
-          if (res.data.modifiedCount > 0) {
-              toast.success("Book updated successfully", { id: tostID });
-              navigate(location?.state? location.state : "/")
-          }
-      } catch (err) {
-        //   console.log(err);
-        toast.error(err.message, {id: tostID})
+    try {
+      const res = await axios.patch(`/update-books/${_id}`, updateBooks);
+      if (res.data.modifiedCount > 0) {
+        toast.success("Book updated successfully", { id: tostID });
+        navigate(location?.state ? location.state : "/");
       }
-
-      
+    } catch (err) {
+      //   console.log(err);
+      toast.error(err.message, { id: tostID });
+    }
   };
 
   return (
     <div className="mt-12">
-      <div className="bg-base-200 p-4 ">
+      <div className=" p-4 ">
         <div className="flex flex-col">
           <h1 className="text-4xl font-bold ">Update Book</h1>
-                  <div className="mt-4">
-                  <LoadingB></LoadingB>
+          <div className="mt-4">
+            <LoadingB></LoadingB>
           </div>
         </div>
         <form onSubmit={handleUpdateBtn}>
-          <div className="mt-12">
+          <div className="mt-12 text-white">
             <div className="mb-6">
               <label className="form-control md:w-full ">
                 <div className="label">
@@ -161,12 +158,14 @@ const UpdateBook = () => {
                   <span className="label-text font-bold">Category</span>
                 </div>
                 <select
-                  className="h-12 rounded-lg px-3"
-                    defaultValue={isCategory}
+                  className="h-12 rounded-lg px-3 text-black border-2"
+                  defaultValue={isCategory}
                   onChange={handleSelectChange}
                 >
-                  <option  disabled value="">Category</option>
-                  <option  value="Computers and Tech">
+                  <option disabled value="">
+                    Category
+                  </option>
+                  <option value="Computers and Tech">
                     Computers & Technology
                   </option>
                   <option value="History">History</option>

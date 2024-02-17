@@ -8,19 +8,12 @@ import PropTypes from "prop-types";
 const Books = ({ allBook }) => {
   // eslint-disable-next-line no-unused-vars
   const [value, setValue] = useState(null);
-  const {
-    image,
-    rating,
-    name,
-    quantity,
-      author_name,
-    _id
-  } = allBook || {};
+  const { image, rating, name, quantity, author_name, _id } = allBook || {};
 
   const rat = Math.round(rating);
 
   return (
-    <div className="card lg:card-side bg-base-300 shadow-xl">
+    <div className="card lg:card-side  shadow-xl">
       <figure>
         <img className="object-cover" src={image} alt="Album" />
       </figure>
@@ -38,10 +31,18 @@ const Books = ({ allBook }) => {
           />
         </div>
         <div className="card-actions justify-end">
-          <Link data-tip="details" to={`/books/${_id}`} className="flex btn btn-outline items-center justify-center w-full tooltip tooltip-top">
-            <BsFillInfoCircleFill className="text-5xl text-red-500 hover:text-red-700"/>
+          <Link
+            data-tip="details"
+            to={`/books/${_id}`}
+            className="flex btn btn-outline items-center justify-center w-full tooltip tooltip-top"
+          >
+            <BsFillInfoCircleFill className="text-5xl text-red-500 hover:text-red-700" />
           </Link>
-          <Link data-tip="update book" to={`/update/${_id}`} className="flex btn btn-outline items-center justify-center w-full tooltip tooltip-top">
+          <Link
+            data-tip="update book"
+            to={`/update/${_id}`}
+            className="flex btn btn-outline items-center justify-center w-full tooltip tooltip-top"
+          >
             Update
           </Link>
         </div>

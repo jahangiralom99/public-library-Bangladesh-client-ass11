@@ -6,17 +6,17 @@ import { useState } from "react";
 
 const AllBooks = () => {
   const axios = useAxios();
-  const [order, setOrder] = useState('');
+  const [order, setOrder] = useState("");
 
-  const { data, isLoading,isFetching } = useQuery({
-    queryKey: ["history", order],
-    queryFn: () => {
-      return axios.get(`/all-books?sortField=quantity&sortOrder=${order}`);
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["allBooks", order],
+    queryFn: async () => {
+      const res = await axios.get(
+        `/all-books?sortField=quantity&sortOrder=${order}`
+      );
+      return res.data;
     },
   });
-  if (isFetching) {
-    return <LoadingPage></LoadingPage>
-  }
 
   if (isLoading) {
     return <LoadingPage></LoadingPage>;
@@ -29,15 +29,15 @@ const AllBooks = () => {
           <div className="font-bold">Sort by Quantity</div>
           <select
             onChange={(e) => setOrder(e.target.value)}
-            className="select select-error w-full max-w-xs "
+            className="select select-error w-full max-w-xs bg-white text-black"
           >
             <option value="desc">desc</option>
             <option value="asc">asc</option>
           </select>
         </div>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        {data?.data.map((allBook) => (
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 px-4">
+        {data?.map((allBook) => (
           <Books key={allBook._id} allBook={allBook}></Books>
         ))}
       </div>

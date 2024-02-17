@@ -69,19 +69,11 @@ const Root = createBrowserRouter([
       },
       {
         path: "all-Books",
-        element: (
-          <PrivetRoute>
-            <AllBooks></AllBooks>
-          </PrivetRoute>
-        ),
+        element: <AllBooks></AllBooks>,
       },
       {
         path: "/books/:id",
-        element: (
-          <PrivetRoute>
-            <BookDetails></BookDetails>
-          </PrivetRoute>
-        ),
+        element: <BookDetails></BookDetails>,
       },
       {
         path: "/update/:id",
@@ -95,25 +87,17 @@ const Root = createBrowserRouter([
         path: "/read/:id",
         element: (
           <PrivetRoute>
-           <ReadBook></ReadBook>
+            <ReadBook></ReadBook>
           </PrivetRoute>
         ),
       },
       {
         path: "borrowed-Books",
-        element: (
-          <PrivetRoute>
-            <BorrowedBooks></BorrowedBooks>
-          </PrivetRoute>
-        ),
+        element: <BorrowedBooks></BorrowedBooks>,
       },
       {
         path: "spaces-rooms",
-        element: (
-          <PrivetRoute>
-            <SpacesRooms></SpacesRooms>
-          </PrivetRoute>
-        ),
+        element: <SpacesRooms></SpacesRooms>,
       },
       {
         path: "login",

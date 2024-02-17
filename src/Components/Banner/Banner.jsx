@@ -5,11 +5,12 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import Button from "../ui/Button";
-import LoadingB from "../ui/LoadingB";
+import Hr from "../ui/Hr";
+import Marquee from "react-fast-marquee";
 
 const Banner = () => {
   return (
-    <div className="lg:flex bg-[#f2f0ee] mt-2 mb-6">
+    <div className="lg:flex mt-2 mb-6">
       <div className="lg:w-[70%]">
         <Swiper
           pagination={{
@@ -19,6 +20,20 @@ const Banner = () => {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
+          <SwiperSlide>
+            {/* slider 4 */}
+            <img
+              className="object-cover h-screen"
+              src="https://i.postimg.cc/sf4jdjVd/thought-catalog-Bl-Gmd-Y18-CFQ-unsplash.jpg"
+              alt=""
+            />
+            <div className="absolute bottom-40 left-6 text-white">
+              <h1 className="text-6xl font-bold text-black">
+                Recollect your <br /> past for the future
+              </h1>
+            </div>
+            <div className="z-20 h-44 bg-[#1b1b1b] w-full -mt-9"></div>
+          </SwiperSlide>
           <SwiperSlide>
             {/* slider 1  */}
             <img
@@ -96,7 +111,7 @@ const Banner = () => {
           <div className="px-9 py-5 space-y-3">
             {/* 1st  */}
             <h2 className="text-3xl font-bold ">Library Guides</h2>
-            <LoadingB></LoadingB>
+            <Hr />
             <p className="font-semibold font-sans">
               Find books, media, databases, e-journals and digital resources.
             </p>
@@ -105,7 +120,7 @@ const Banner = () => {
           <div className="px-9 py-5 space-y-3">
             {/* 2nd */}
             <h2 className="text-3xl font-bold ">Borrow, Reserve, Renew</h2>
-            <LoadingB></LoadingB>
+            <Hr />
             <p className="font-semibold font-sans">
               Get advanced research assistance in dozens of subject areas.
             </p>
@@ -114,16 +129,16 @@ const Banner = () => {
           <div className="px-9 py-5 space-y-3">
             {/* 3rd */}
             <h2 className="text-3xl font-bold ">Study Spaces & PCs</h2>
-            <LoadingB></LoadingB>
+            <Hr />
             <p className="font-semibold font-sans">
               Deposit data, papers, and other resources for long-term access.
             </p>
             <Button>Read More</Button>
           </div>
         </div>
-        <div className="lg:absolute lg:-bottom-[260px] 	">
+        <div className="lg:absolute lg:-bottom-[315px] 	">
           <img
-            className="h-40 object-cover lg:w-96 w-full"
+            className="h-[141px] object-cover lg:w-96 w-full"
             src="https://i.postimg.cc/kMf8hFzW/01-home-03.jpg"
             alt=""
           />
@@ -131,7 +146,12 @@ const Banner = () => {
             <div className="-mt-28 md:ml-32 lg:ml-0">
               <h6 className="text-xl text-white">The library is open today</h6>
               <h1 className="text-4xl font-semibold  ml-2 text-white ">
-                9:00 AM – 10:00 PM
+                <Marquee
+                  delay={70} play={true}
+                  className="space-x-3 tracking-tight whitespace-normal"
+                >
+                  Start - 9:00 AM Off – 8:00 PM ||{" "}
+                </Marquee>
               </h1>
             </div>
           </div>

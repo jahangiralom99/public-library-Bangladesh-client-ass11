@@ -9,7 +9,8 @@ export const AuthContext = createContext(null)
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [darkMode, setDarkMode] = useState(false)
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -61,9 +62,9 @@ const AuthProvider = ({children}) => {
         logInUser,
         logOut,
         updateName,
-        loading,
-      
-
+      loading,
+      darkMode,
+      setDarkMode
     }
 
     return (

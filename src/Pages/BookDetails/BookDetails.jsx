@@ -19,7 +19,7 @@ const BookDetails = () => {
   const [disabled, setDisabled] = useState("");
 
   // Load Data \
-  const { data, isLoading, } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["business", isMew],
     queryFn: () => {
       return axios.get(`/all-books/${id}`);
@@ -37,7 +37,6 @@ const BookDetails = () => {
     quantity,
   } = data?.data || {};
   const rat = Math.round(rating);
-
 
   // handle Submit btn
   const handleSubmit = async (e) => {
@@ -62,22 +61,21 @@ const BookDetails = () => {
 
     try {
       const { data } = await axios.post("/create-borrowed-books", profile);
-   
+
       if (data.acknowledged) {
         toast.success("Borrowed Books Added Success", { id: toastId });
         if (quantity >= 1) {
           const updated = await axios.put(`quantity-update/${_id}`, {
-            quantity: quantity -1,
+            quantity: quantity - 1,
           });
           console.log(updated);
           if (updated.data.acknowledged) {
             // return setNew("disabled")
             setNew(updated.data.modifiedCount + 1);
-            
           }
           console.log(updated);
         } else {
-          return setDisabled('disabled')
+          return setDisabled("disabled");
         }
 
         from.reset();
@@ -91,13 +89,12 @@ const BookDetails = () => {
     return <LoadingPage></LoadingPage>;
   }
 
-
   return (
     <div>
       <TopBar>{name}</TopBar>
       <div className="mt-12">
-        <div className="relative items-center lg:items-start flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md w-full lg:flex-row ">
-          <div className="w-[50%] relative overflow-hidden text-gray-700 bg-white rounded-r-none bg-clip-border rounded-xl shrink-0 space-y-10">
+        <div className="relative items-center lg:items-start flex flex-col bg-clip-border rounded-xl  shadow-md w-full lg:flex-row">
+          <div className="w-[50%] relative overflow-hidden text-gray-500 bg-white rounded-r-none bg-clip-border rounded-xl shrink-0 space-y-10">
             <img
               src={image}
               alt="card-image"
@@ -105,9 +102,7 @@ const BookDetails = () => {
             />
           </div>
           <div className="p-6 space-y-10">
-            <h6 className="block mb-4 text-3xl font-bold text-gray-700 uppercase">
-              {name}
-            </h6>
+            <h6 className="block mb-4 text-3xl font-bold uppercase">{name}</h6>
             <h4 className="text-xl font-bold text-red-500">
               quantity : {quantity}
             </h4>
@@ -119,15 +114,20 @@ const BookDetails = () => {
               onChange={(e) => setValue(e.value)}
               cancel={false}
             />
-            <p className="block mb-8 text-base antialiased font-normal leading-relaxed text-gray-700">
+            <p className="block mb-8 text-base antialiased font-normal leading-relaxed ">
               {short_description}
             </p>
             <div className="flex justify-between">
-              <div
-              >
-                <button onClick={() =>
-                  document.getElementById("my_modal_1").showModal()
-                } disabled={disabled} className="btn">Borrowed</button>
+              <div>
+                <button
+                  onClick={() =>
+                    document.getElementById("my_modal_1").showModal()
+                  }
+                  disabled={disabled}
+                  className="btn"
+                >
+                  Borrowed
+                </button>
               </div>
               <Link to={`/read/${_id}`}>
                 <Button>Read</Button>

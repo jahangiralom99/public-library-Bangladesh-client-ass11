@@ -1,21 +1,20 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxios from "../../Hooks/useAxios";
 import toast from "react-hot-toast";
-import LoadingB from "../../Components/ui/LoadingB";
 import { useState } from "react";
+import Hr from "../../Components/ui/Hr";
 
 const AddBook = () => {
-  const axios = useAxios() 
-  const [isCategory, setCategory] = useState('');
+  const axios = useAxios();
+  const [isCategory, setCategory] = useState("");
   const location = useLocation();
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const handleSelectChange = (e) => {
     setCategory(e.target.value);
-  }
+  };
 
-  const handleUpdateBtn = async(e) => {
+  const handleUpdateBtn = async (e) => {
     e.preventDefault();
     const form = e.target;
     const addBooks = {
@@ -29,33 +28,32 @@ const AddBook = () => {
     };
     console.log(addBooks);
 
-    const toastID = toast.loading("Please wait...")
+    const toastID = toast.loading("Please wait...");
 
     try {
-      const res =await axios.post("/create-books", addBooks);
+      const res = await axios.post("/create-books", addBooks);
       if (res.data.acknowledged) {
         toast.success("Book Added successfully", { id: toastID });
-        navigate(location?.state? location.state : "/")
-     }
-
+        navigate(location?.state ? location.state : "/");
+      }
     } catch (err) {
-      toast.error(err.message, {id: toastID})
+      toast.error(err.message, { id: toastID });
       console.log(err);
     }
-
-    
   };
 
   return (
     <div className="mt-12">
-      <div className="bg-base-200 p-4 ">
+      <div className=" p-4 ">
         <div className="flex flex-col">
-        <h1 className="text-4xl font-bold ">Add Books</h1>
-        <LoadingB></LoadingB>
-       </div>
+          <h1 className="text-4xl font-bold ">Add Books</h1>
+          <div className="w-96 mt-3">
+            <Hr />
+          </div>
+        </div>
         <form onSubmit={handleUpdateBtn}>
           <div className="mt-12">
-          <div className="mb-6">
+            <div className="mb-6">
               <label className="form-control md:w-full ">
                 <div className="label">
                   <span className="label-text font-bold">Image</span>
@@ -112,9 +110,7 @@ const AddBook = () => {
               </label>
               <label className="form-control md:w-1/2">
                 <div className="label">
-                  <span className="label-text font-bold">
-                  Author Name
-                  </span>
+                  <span className="label-text font-bold">Author Name</span>
                 </div>
                 <input
                   type="text"
@@ -138,7 +134,7 @@ const AddBook = () => {
                   id="dropdown"
                 >
                   <option value="">Select Category</option>
-                  <option  value="Computers and Tech">
+                  <option value="Computers and Tech">
                     Computers & Technology
                   </option>
                   <option value="History">History</option>
@@ -148,25 +144,26 @@ const AddBook = () => {
               </label>
               <label className="form-control md:w-1/2">
                 <div className="label">
-                  <span className="label-text font-bold">Short description</span>
+                  <span className="label-text font-bold">
+                    Short description
+                  </span>
                 </div>
                 <input
                   type="text"
                   required
                   name="short_description"
                   placeholder="Short description"
-                  className="input border-none w-full "
+                  className="input border-none w-full"
                 />
               </label>
             </div>
-            
           </div>
           <div className="mt-6">
-          <input
-            type="submit"
-            value="Add Books"
-            className="font-bold text-red-500 btn btn-outline w-full"
-          />
+            <input
+              type="submit"
+              value="Add Books"
+              className="font-bold text-red-500 btn btn-outline w-full"
+            />
           </div>
         </form>
         <Link

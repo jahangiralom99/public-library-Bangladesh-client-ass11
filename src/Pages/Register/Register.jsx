@@ -22,7 +22,7 @@ const Register = () => {
     const password = form.password.value;
 
     setError("");
-// password Handle 
+    // password Handle
     if (password.length < 6) {
       setError("Password must be at least 6 characters");
       return;
@@ -40,7 +40,7 @@ const Register = () => {
     try {
       const users = await createUser(email, password);
       await updateName(name, photo);
-      const userEmail = users.user.email;
+      const userEmail = users?.user?.email;
       const res = await axios.post("/create-jwt-token", { userEmail });
       console.log(res);
       toast.success("logged in successfully...", { id: toastId });
@@ -51,13 +51,13 @@ const Register = () => {
     }
   };
 
-
   // handle Google Login
   const handleGoogle = async () => {
     const toastID = toast.loading("Google logged in.............");
     try {
       const users = await googleLogIn();
-      const userEmail = users.user.email;
+      console.log(users);
+      const userEmail = users?.user?.email;
       await axios.post("/create-jwt-token", { userEmail });
       toast.success("Google logged in Successfully", { id: toastID });
       navigate(location?.state ? location.state : "/");
